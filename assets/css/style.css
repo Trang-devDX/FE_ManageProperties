@@ -1,0 +1,11 @@
+button {
+    width: 250px;
+}
+
+i {
+    cursor: pointer;
+}
+
+#form-edit label {
+    width: 150px;
+}
