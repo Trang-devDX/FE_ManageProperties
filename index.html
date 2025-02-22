@@ -25,8 +25,10 @@
                 <input type="text" id="max-rent-price" class="rounded-2">
             </div>
             <button type="button" class="btn btn-primary" onclick="searchRentalUnit()">Tìm kiếm</button>
+            
         </div>
         <table class="table table-bordered table-striped mt-4">
+            <button type="button" class="btn btn-primary" onclick="sortRentalUnit()">Sắp xếp theo giá thuê</button>
             <thead class="table-light">
                 <tr>
                     <th>ID</th>
@@ -168,6 +170,19 @@
             let minRentPrice = document.getElementById("min-rent-price").value;
             let maxRentPrice = document.getElementById("max-rent-price").value;
             let url = `http://localhost:8080/api/rental-units/search?rentPriceFrom=${encodeURIComponent(minRentPrice)}&rentPriceTo=${encodeURIComponent(maxRentPrice)}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    renderTable(data);
+                })
+                .catch(error => console.error("Error fetching rental units:", error));
+        }
+
+        function sortRentalUnit() {
+            let minRentPrice = document.getElementById("min-rent-price").value;
+            let maxRentPrice = document.getElementById("max-rent-price").value;
+            let url = `http://localhost:8080/api/rental-units/sort`;
 
             fetch(url)
                 .then(response => response.json())
